@@ -1,0 +1,7 @@
+File name: server.js
+Purpose: Contains methods which handle base application routes and authentication.
+Description: The base controller takes care of handling authentication requests for other API calls, and exposes certain middleware that facilitate this. It also initializes base API URLs, particularly for routing, etc.
+
+ENDPOINTS
+GET /api/allseekerprofiles
+*** Gets the list of all entries in the JobSeekerProfile table of the database.

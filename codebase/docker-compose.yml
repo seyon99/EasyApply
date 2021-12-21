@@ -1,0 +1,50 @@
+version: '3.3'
+services:
+  # Reverse proxy to services
+  reverseproxy:
+    env_file: .env.prod
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    restart: always
+    networks:
+      - default
+    depends_on:
+      - apiserver
+      - frontend
+
+  frontend:
+    env_file: .env.prod
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: easyapply-frontend
+    container_name: easyapply-frontend-ctr
+    restart: unless-stopped
+    volumes:
+      - ./frontend:/app
+    command: npm run serve
+    networks:
+      - default
+    ports:
+      - "8000:${FRONTEND_PORT}"
+  apiserver:
+    env_file: .env.prod
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: easyapply-backend
+    container_name: easyapply-backend-ctr
+    restart: unless-stopped
+    volumes:
+      - ./backend:/app
+    command: npm start
+    networks:
+      - default
+    ports:
+      - "8001:${API_PORT}"
