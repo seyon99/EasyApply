@@ -1,6 +1,0 @@
-Purpose: Displays the jobseeker profiles of interest to recruiter.
-Type: react Component
-
-/**
-*  @return an HTML5 Object.
-*/

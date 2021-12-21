@@ -1,6 +1,0 @@
-Purpose: Send search and filter data to current page.
-Type: react Component
-
-/**
-*  @return an HTML5 Object.
-*/
